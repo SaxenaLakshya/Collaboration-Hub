@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Dashboard</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Bootstrap Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #444444;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .navbar-text {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .navbar-collapse {
+            justify-content: flex-end;
+        }
+
+        .nav-item {
+            margin-left: 15px;
+        }
+
+        .dashboard-item {
+            background-color: #353535;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .dashboard-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #d4af37;
+            /* Metallic gold */
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #d4af37;
+            /* Metallic gold */
+        }
+
+        .description {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .footer {
+            background-color: #444444;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Welcome Back !!</a>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="navbar-text" id="currentDateTime"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4" onclick="redirectToPage('ai-chat')">
+                <div class="dashboard-item">
+                    <i class="fas fa-comment-dots icon"></i>
+                    <h2 class="title">AI Chat</h2>
+                    <p class="description">Start chatting with AI</p>
+                </div>
+            </div>
+            <div class="col-md-4" onclick="redirectToPage('video-conferencing')">
+                <div class="dashboard-item">
+                    <i class="fas fa-video icon"></i>
+                    <a href="http://localhost:8000/"><h2 class="title">Video Conferencing</h2></a>
+                    <p class="description">Join a video conference</p>
+                </div>
+            </div>
+            <div class="col-md-4" onclick="redirectToPage('tasks')">
+                <div class="dashboard-item">
+                    <i class="fas fa-tasks icon"></i>
+                    <a href="task manager/index.html"><h2 class="title">Tasks</h2></a>
+                    <p class="description">Manage your tasks</p>
+                </div>
+            </div>
+            <div class="col-md-4" onclick="redirectToPage('coding')">
+                <div class="dashboard-item">
+                    <i class="fas fa-code icon"></i>
+                    <a href="coding.html"><h2 class="title">Coding</h2></a>
+                    <p class="description">Start coding now</p>
+                </div>
+            </div>
+            <div class="col-md-4" onclick="redirectToPage('team')">
+                <div class="dashboard-item">
+                    <i class="fas fa-users icon"></i>
+                    <h2 class="title">Team</h2>
+                    <p class="description">Collaborate with your team</p>
+                </div>
+            </div>
+            <div class="col-md-4" onclick="redirectToPage('group-messenger')">
+                <div class="dashboard-item">
+                    <i class="fas fa-users icon"></i>
+                    <a href="messenger/index.html"><h2 class="title">Group Messenger</h2></a>
+                    <p class="description">Chat with your group</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <span>Collaboration Hub</span>
+        </div>
+    </footer>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <!-- Firebase configuration -->
+    <script type="module" defer>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxtDD3R9AqbZqrP4TNLkTo31aoKpwGIcI",
+            authDomain: "agile-magnet-412116.firebaseapp.com",
+            projectId: "agile-magnet-412116",
+            storageBucket: "agile-magnet-412116.appspot.com",
+            messagingSenderId: "112665021927",
+            appId: "1:112665021927:web:4776100b9d28c0e0a7c142",
+            measurementId: "G-7PN8SM89BV"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Function to redirect to page based on item clicked
+        function redirectToPage(page) {
+            // Check if user is authenticated
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    // User is signed in, redirect to the corresponding page
+                    window.location.href = `dashboard.html${page}`;
+                } else {
+                    // No user is signed in, redirect to login page
+                    window.location.href = "login.html";
+                }
+            });
+        }
+
+        // Function to update current date time
+        function updateDateTime() {
+            var now = new Date();
+            var dateTimeString = now.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+            document.getElementById('currentDateTime').innerText = dateTimeString;
+        }
+        // Update date time every second
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+
+</html>
